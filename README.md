@@ -233,6 +233,3 @@ Store Postman screenshots in the `screenshots/` folder. Recommended screenshots:
 - Modular backend design
 - API testing with Postman
 - Git/GitHub version control
-
-## Author
-Sameer Yadav
