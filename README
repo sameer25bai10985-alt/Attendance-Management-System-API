@@ -1,27 +1,869 @@
-# Screenshots
+# Attendance Management System API
 
-This folder contains **mockup / expected-result images** for each key endpoint, generated to
-show the documented request and response shape (method, URL, request body, status code, and
-response JSON) exactly as implemented in `routes/*.py` and `models/*.py`.
+A modular **RESTful Attendance Management System API** developed using **Python, Flask, and MySQL**. The system provides APIs for managing students, subjects, attendance records, and attendance percentage calculations.
 
-**These are illustrations, not live captures** — they were not produced by hitting a running
-server against a real MySQL database. Each image is watermarked with a footer note saying so.
-Before final submission, it's worth replacing them with real Postman screenshots captured
-against your own running instance (see **Testing Instructions → Manual / live testing** in the
-main `README.md`), since a grader may expect genuine captures rather than mockups.
+The project is designed to demonstrate practical application of **REST API development, CRUD operations, database management, input validation, error handling, modular architecture, and automated testing**.
 
-| File | Endpoint | Scenario |
-|---|---|---|
-| `01-create-subject.png` | `POST /subjects` | Successful subject creation |
-| `02-get-subjects.png` | `GET /subjects` | List of subjects |
-| `03-mark-attendance.png` | `POST /attendance` | Successful attendance marking |
-| `04-duplicate-attendance.png` | `POST /attendance` | Duplicate request rejected (400) |
-| `05-attendance-by-student.png` | `GET /attendance/student/{id}` | Attendance history for a student |
-| `06-attendance-by-date.png` | `GET /attendance/date/{date}` | Date-wise attendance |
-| `07-overall-percentage.png` | `GET /attendance/percentage/student/{id}` | Overall attendance percentage |
-| `08-subject-percentage.png` | `GET /attendance/percentage/student/{id}/subject/{id}` | Subject-wise attendance percentage |
+---
 
-To regenerate real screenshots: run the server locally (`python app.py`) against a live MySQL
-database, send each request above in Postman, and export/screenshot the response, replacing the
-matching file in this folder.
+## 1. Project Overview
 
+Managing attendance manually can be time-consuming and may result in duplicate records, calculation errors, and difficulty in maintaining attendance information for multiple students and subjects.
+
+The **Attendance Management System API** provides a centralized backend solution for managing attendance information.
+
+The system allows users to:
+
+* Manage student records
+* Manage subject records
+* Mark student attendance
+* Retrieve attendance records
+* Prevent duplicate attendance entries
+* Calculate overall attendance percentage
+* Calculate subject-wise attendance percentage
+* Validate API requests
+* Handle invalid requests and errors
+* Test API functionality
+
+The application follows a modular architecture in which API routes, database models, database connectivity, and testing are maintained separately.
+
+---
+
+## 2. Problem Statement
+
+Traditional attendance management is often performed manually using registers or spreadsheets. This approach can become difficult when managing a large number of students and subjects.
+
+Manual systems may lead to:
+
+* Duplicate attendance entries
+* Incorrect attendance calculations
+* Difficulty searching attendance records
+* Increased maintenance effort
+* Data inconsistency
+* Difficulty generating attendance percentages
+
+Therefore, a centralized and structured API-based attendance management system is required to simplify attendance management and provide reliable attendance calculations.
+
+---
+
+## 3. Objectives
+
+The main objectives of this project are:
+
+1. To develop a RESTful API for attendance management.
+2. To provide CRUD operations for student records.
+3. To provide CRUD operations for subject records.
+4. To record student attendance efficiently.
+5. To prevent duplicate attendance records.
+6. To retrieve attendance information using API requests.
+7. To calculate overall attendance percentage.
+8. To calculate subject-wise attendance percentage.
+9. To validate input data before database operations.
+10. To provide meaningful error responses.
+11. To use a modular and maintainable project structure.
+12. To test important API functionalities.
+
+---
+
+## 4. Scope of the Project
+
+The scope of the project includes:
+
+### Student Management
+
+* Add student
+* View student
+* Update student
+* Delete student
+
+### Subject Management
+
+* Add subject
+* View subjects
+* Update subject
+* Delete subject
+
+### Attendance Management
+
+* Mark attendance
+* Retrieve attendance
+* Prevent duplicate attendance
+* Retrieve attendance by student
+* Retrieve attendance by date
+
+### Attendance Analytics
+
+* Calculate overall attendance percentage
+* Calculate subject-wise attendance percentage
+
+The current project focuses on backend/API functionality. A graphical web dashboard, authentication system, mobile application, and cloud deployment can be added in future versions.
+
+---
+
+## 5. Target Users
+
+The main target users are:
+
+* Faculty members
+* Teachers
+* Academic administrators
+* Educational institutions
+* Developers learning REST API development
+
+The API can be extended in the future to provide separate interfaces for faculty and students.
+
+---
+
+# 6. Functional Requirements
+
+## FR1 – Student Management
+
+The system shall allow users to create, retrieve, update, and delete student records.
+
+## FR2 – Subject Management
+
+The system shall allow users to create, retrieve, update, and delete subject records.
+
+## FR3 – Attendance Management
+
+The system shall allow users to mark attendance for a student for a particular subject and date.
+
+## FR4 – Duplicate Attendance Prevention
+
+The system shall prevent duplicate attendance records for the same student, subject, and date.
+
+## FR5 – Attendance Retrieval
+
+The system shall allow attendance records to be retrieved using appropriate API endpoints.
+
+## FR6 – Overall Attendance Calculation
+
+The system shall calculate the overall attendance percentage of a student.
+
+## FR7 – Subject-wise Attendance Calculation
+
+The system shall calculate attendance percentage for a particular subject.
+
+## FR8 – Input Validation
+
+The system shall validate required fields and reject invalid or incomplete requests.
+
+## FR9 – Error Handling
+
+The system shall return appropriate HTTP status codes and meaningful error messages.
+
+---
+
+# 7. Non-Functional Requirements
+
+## 7.1 Performance
+
+The API should process normal CRUD and attendance requests efficiently with minimal response time.
+
+## 7.2 Reliability
+
+The system should maintain consistent attendance records and prevent duplicate attendance entries.
+
+## 7.3 Usability
+
+The API should provide clear request formats, response structures, and meaningful error messages.
+
+## 7.4 Maintainability
+
+The project is divided into separate modules such as routes, models, database connection, and testing to make future maintenance easier.
+
+## 7.5 Scalability
+
+The modular architecture allows additional modules such as authentication, notifications, dashboards, and reporting to be added in the future.
+
+## 7.6 Security
+
+Sensitive configuration information such as database credentials should not be hard-coded in the source code. Environment variables can be used for configuration.
+
+## 7.7 Error Handling
+
+The system should handle invalid input, missing fields, duplicate records, and database-related errors appropriately.
+
+## 7.8 Resource Efficiency
+
+The application should avoid unnecessary processing and perform database operations efficiently.
+
+---
+
+# 8. Major Functional Modules
+
+The system contains the following major modules:
+
+### Module 1 – Student Management
+
+Responsible for:
+
+* Creating students
+* Retrieving students
+* Updating students
+* Deleting students
+
+### Module 2 – Subject Management
+
+Responsible for:
+
+* Creating subjects
+* Retrieving subjects
+* Updating subjects
+* Deleting subjects
+
+### Module 3 – Attendance Management
+
+Responsible for:
+
+* Marking attendance
+* Retrieving attendance
+* Preventing duplicate attendance
+* Searching attendance records
+
+### Module 4 – Attendance Analytics
+
+Responsible for:
+
+* Overall attendance percentage
+* Subject-wise attendance percentage
+
+These modules satisfy the requirement of having at least three major functional modules.
+
+---
+
+# 9. Technology Stack
+
+| Technology | Purpose                 |
+| ---------- | ----------------------- |
+| Python     | Backend programming     |
+| Flask      | REST API framework      |
+| MySQL      | Database management     |
+| SQL        | Database operations     |
+| Postman    | API testing             |
+| Pytest     | Automated testing       |
+| Git        | Version control         |
+| GitHub     | Repository hosting      |
+| VS Code    | Development environment |
+
+---
+
+# 10. System Architecture
+
+The project follows a modular layered architecture.
+
+```text
+                +----------------------+
+                |       Client         |
+                |  Postman / API User  |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |     Flask API        |
+                |      Routes          |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |      Models          |
+                | Data Access / Logic  |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                | Database Connection  |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |        MySQL         |
+                |      Database        |
+                +----------------------+
+```
+
+### Architecture Flow
+
+**Client → Flask Routes → Models → Database Connection → MySQL**
+
+The response follows the reverse direction:
+
+**MySQL → Database Layer → Models → Routes → Client**
+
+---
+
+# 11. Project Structure
+
+The project is organized into separate modules to improve maintainability.
+
+```text
+Attendance-Management-System-API/
+│
+├── app.py
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── test_api.py
+├── statement.md
+├── PROJECT_REPORT.md
+│
+├── models/
+│   ├── student.py
+│   ├── subject.py
+│   └── attendance.py
+│
+├── routes/
+│   ├── student_routes.py
+│   ├── subject_routes.py
+│   └── attendance_routes.py
+│
+├── database/
+│   └── database.py
+│
+├── docs/
+│   ├── architecture.md
+│   ├── workflow.md
+│   ├── use_case.md
+│   ├── sequence_diagram.md
+│   ├── component_diagram.md
+│   └── er_diagram.md
+│
+└── screenshots/
+```
+
+*The exact structure should match the final files in the repository.*
+
+---
+
+# 12. API Design
+
+The system follows REST principles.
+
+Common HTTP methods used are:
+
+| Method | Purpose                   |
+| ------ | ------------------------- |
+| POST   | Create a new record       |
+| GET    | Retrieve records          |
+| PUT    | Update an existing record |
+| DELETE | Delete a record           |
+
+---
+
+# 13. Student API
+
+The Student module provides CRUD operations.
+
+### Main operations
+
+```text
+POST    /students
+GET     /students
+GET     /students/<id>
+PUT     /students/<id>
+DELETE  /students/<id>
+```
+
+The API accepts student information in JSON format and returns JSON responses.
+
+Example:
+
+```json
+{
+    "name": "Student Name",
+    "email": "student@example.com"
+}
+```
+
+---
+
+# 14. Subject API
+
+The Subject module provides CRUD operations for subjects.
+
+Example operations:
+
+```text
+POST    /subjects
+GET     /subjects
+GET     /subjects/<id>
+PUT     /subjects/<id>
+DELETE  /subjects/<id>
+```
+
+The subject information is stored in the MySQL database.
+
+---
+
+# 15. Attendance API
+
+The Attendance module is responsible for recording and retrieving attendance.
+
+Attendance generally contains information such as:
+
+* Student
+* Subject
+* Date
+* Attendance status
+
+The system checks for duplicate attendance before creating a new attendance record.
+
+---
+
+# 16. Attendance Calculation
+
+Attendance percentage can be calculated using:
+
+```text
+Attendance Percentage =
+(Number of Classes Attended / Total Number of Classes) × 100
+```
+
+### Example
+
+If a student attended 42 classes out of 50:
+
+```text
+Attendance = (42 / 50) × 100
+
+Attendance = 84%
+```
+
+The system can calculate attendance for:
+
+* Overall attendance
+* Individual subjects
+
+---
+
+# 17. Duplicate Attendance Prevention
+
+Duplicate attendance is an important data-integrity requirement.
+
+For the same:
+
+```text
+Student + Subject + Date
+```
+
+the system should not create another attendance record.
+
+If a duplicate request is received, the API returns an appropriate error response instead of creating another record.
+
+This prevents incorrect attendance percentages.
+
+---
+
+# 18. Input Validation
+
+The system validates incoming requests before processing them.
+
+Examples include:
+
+* Required field validation
+* Empty value validation
+* Invalid request validation
+* Student existence validation
+* Subject existence validation
+* Duplicate attendance validation
+
+Validation reduces incorrect data entering the database.
+
+---
+
+# 19. Error Handling
+
+The system uses appropriate HTTP responses for different situations.
+
+Examples:
+
+| Situation            | Expected Response        |
+| -------------------- | ------------------------ |
+| Successful creation  | 201 Created              |
+| Successful retrieval | 200 OK                   |
+| Successful update    | 200 OK                   |
+| Successful deletion  | 200 OK / 204 No Content  |
+| Invalid request      | 400 Bad Request          |
+| Record not found     | 404 Not Found            |
+| Duplicate attendance | Appropriate client error |
+
+Error responses should provide a meaningful message to help the API user understand the problem.
+
+---
+
+# 20. Database Design
+
+MySQL is used as the persistent storage system.
+
+The database contains related entities for:
+
+* Students
+* Subjects
+* Attendance
+
+Conceptually:
+
+```text
+STUDENT
+   |
+   | 1
+   |
+   | M
+ATTENDANCE
+   |
+   | M
+   |
+   | 1
+SUBJECT
+```
+
+The Attendance entity connects students and subjects and stores attendance information.
+
+The detailed ER diagram is provided separately in:
+
+`er_diagram.md`
+
+---
+
+# 21. Database Integrity
+
+The database design aims to maintain:
+
+### Entity Integrity
+
+Each important record has a unique identifier.
+
+### Referential Integrity
+
+Attendance records are associated with valid students and subjects.
+
+### Data Consistency
+
+Duplicate attendance records are prevented.
+
+### Persistent Storage
+
+Attendance information remains available after the application is restarted because it is stored in MySQL.
+
+---
+
+# 22. Design Decisions and Rationale
+
+## Flask
+
+Flask was selected because it is lightweight and suitable for developing RESTful APIs using Python.
+
+## MySQL
+
+MySQL was selected because attendance information is structured and contains relationships between students, subjects, and attendance records.
+
+## REST API
+
+REST provides a standard approach for communication between clients and the backend.
+
+## Modular Structure
+
+Separating routes and models improves code organization and maintainability.
+
+## Postman
+
+Postman provides a convenient way to send API requests and inspect responses.
+
+## Automated Testing
+
+Automated tests help verify important API functionality and reduce the chance of regression.
+
+---
+
+# 23. Security Considerations
+
+The project follows basic security practices suitable for the current academic scope.
+
+* Database credentials should be stored using environment variables.
+* Sensitive configuration should not be committed to GitHub.
+* `.gitignore` is used to prevent unwanted files from being tracked.
+* Input validation is performed before database operations.
+* Invalid requests are rejected.
+* Duplicate attendance is prevented.
+
+### Future Security Improvements
+
+A production version can implement:
+
+* User authentication
+* JWT authentication
+* Role-based authorization
+* Password hashing
+* API rate limiting
+* HTTPS deployment
+
+---
+
+# 24. Testing Strategy
+
+Testing is performed at different levels.
+
+### 24.1 API Testing
+
+API requests are tested using Postman.
+
+### 24.2 Automated Testing
+
+Python testing tools are used to test important application functionality.
+
+### 24.3 Validation Testing
+
+Invalid and incomplete requests are tested to verify error handling.
+
+### 24.4 Database Testing
+
+Database operations are checked to ensure records are created, retrieved, updated, and deleted correctly.
+
+---
+
+# 25. Test Cases
+
+| ID   | Test Case                      | Expected Result             |
+| ---- | ------------------------------ | --------------------------- |
+| TC01 | Create valid student           | Student created             |
+| TC02 | Retrieve students              | Student list returned       |
+| TC03 | Update student                 | Student information updated |
+| TC04 | Delete student                 | Student deleted             |
+| TC05 | Create valid subject           | Subject created             |
+| TC06 | Retrieve subjects              | Subject list returned       |
+| TC07 | Update subject                 | Subject updated             |
+| TC08 | Delete subject                 | Subject deleted             |
+| TC09 | Mark attendance                | Attendance created          |
+| TC10 | Mark duplicate attendance      | Duplicate rejected          |
+| TC11 | Retrieve attendance by student | Correct records returned    |
+| TC12 | Retrieve attendance by date    | Correct records returned    |
+| TC13 | Calculate overall percentage   | Correct percentage returned |
+| TC14 | Calculate subject percentage   | Correct percentage returned |
+| TC15 | Send invalid request           | Validation error returned   |
+| TC16 | Request unavailable record     | Not-found response returned |
+
+**Update the status column with your actual test results before final submission.**
+
+---
+
+# 26. Testing Result Format
+
+After performing the actual tests, results can be documented as:
+
+| Test ID | Expected                      | Actual                        | Status |
+| ------- | ----------------------------- | ----------------------------- | ------ |
+| TC01    | Student created               | Student created               | PASS   |
+| TC02    | Student list returned         | Student list returned         | PASS   |
+| TC03    | Student updated               | Student updated               | PASS   |
+| TC04    | Student deleted               | Student deleted               | PASS   |
+| TC05    | Subject created               | Subject created               | PASS   |
+| TC06    | Subjects returned             | Subjects returned             | PASS   |
+| TC07    | Subject updated               | Subject updated               | PASS   |
+| TC08    | Subject deleted               | Subject deleted               | PASS   |
+| TC09    | Attendance recorded           | Attendance recorded           | PASS   |
+| TC10    | Duplicate rejected            | Duplicate rejected            | PASS   |
+| TC11    | Attendance returned           | Attendance returned           | PASS   |
+| TC12    | Date records returned         | Date records returned         | PASS   |
+| TC13    | Percentage calculated         | Percentage calculated         | PASS   |
+| TC14    | Subject percentage calculated | Subject percentage calculated | PASS   |
+
+**Only report PASS after actually performing the test.**
+
+---
+
+# 27. Workflow
+
+The general workflow is:
+
+```text
+Start
+  |
+  v
+Client sends API request
+  |
+  v
+Flask receives request
+  |
+  v
+Validate input
+  |
+  +---- Invalid ----> Return Error Response
+  |
+  v
+Process request
+  |
+  v
+Perform database operation
+  |
+  v
+Generate response
+  |
+  v
+Return JSON response
+  |
+  v
+End
+```
+
+For attendance:
+
+```text
+Select Student
+      |
+      v
+Select Subject
+      |
+      v
+Enter Attendance Date/Status
+      |
+      v
+Validate Data
+      |
+      v
+Check Duplicate
+      |
+   +--+--+
+   |     |
+ Exists  New
+   |     |
+ Error   Save
+         |
+         v
+   Return Response
+```
+
+---
+
+# 28. Use Case Summary
+
+### Actor
+
+**Faculty / Authorized API User**
+
+### Main Use Cases
+
+* Manage students
+* Manage subjects
+* Mark attendance
+* View attendance
+* Calculate attendance percentage
+* Handle invalid requests
+
+The complete Use Case Diagram is available in:
+
+`use_case.md`
+
+---
+
+# 29. Sequence Flow
+
+A typical attendance operation follows:
+
+```text
+Client
+   |
+   | Attendance Request
+   v
+Attendance Route
+   |
+   | Validate Request
+   v
+Attendance Model
+   |
+   | Database Query
+   v
+MySQL
+   |
+   | Result
+   v
+Attendance Model
+   |
+   | Response
+   v
+Attendance Route
+   |
+   v
+Client
+```
+
+The detailed sequence diagram is provided separately.
+
+---
+
+# 30. Innovation and Project Depth
+
+The project demonstrates more than simple CRUD operations by combining multiple related modules.
+
+The major depth of the project comes from:
+
+1. Relationship between students, subjects, and attendance.
+2. Duplicate attendance prevention.
+3. Attendance percentage calculation.
+4. Subject-wise attendance analysis.
+5. Input validation.
+6. Error handling.
+7. Persistent MySQL storage.
+8. Modular Flask architecture.
+9. Automated testing.
+10. RESTful API design.
+
+These features make the system more useful than a basic database CRUD application.
+
+---
+
+# 31. Current Limitations
+
+The current version has some limitations:
+
+1. It is primarily a backend REST API.
+2. A dedicated graphical dashboard is not included.
+3. Authentication and role-based access are not included in the current version.
+4. Automatic email/SMS notifications are not included.
+5. Advanced graphical analytics are not included.
+6. Cloud deployment is not part of the current implementation.
+
+These limitations provide opportunities for future development.
+
+---
+
+# 32. Future Enhancements
+
+The following features can be added in future versions:
+
+### 1. Authentication
+
+Add faculty and administrator login.
+
+### 2. Role-Based Access
+
+Different permissions can be provided to administrators, faculty, and students.
+
+### 3. Low Attendance Alerts
+
+Students below the required attendance percentage can be identified automatically.
+
+### 4. Web Dashboard
+
+A frontend dashboard can be developed for easier attendance management.
+
+### 5. Graphical Analytics
+
+Charts can display:
+
+* Subject-wise attendance
+* Monthly attendance
+* Student attendance trends
+
+### 6. Report Generation
+
+Attendance reports can be exported as PDF or Excel files.
+
+### 7. Email Notifications
+
+Automatic notifications can be sent when attendance falls below the required threshold.
+
+### 8. Cloud Deployment
+
+The application can be deployed on a cloud platform for remote access.
+
+### 9. Mobile A
