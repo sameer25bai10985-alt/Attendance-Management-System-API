@@ -1,68 +1,115 @@
-# Library-management-system-project
 # Attendance Management System API
+
 ## Project Overview
-This project is a Backend REST API for managing student attendance.
+Attendance Management System API is a backend REST API developed using **Python, Flask, and MySQL**. It provides a structured way to manage subjects and student attendance records. The system supports attendance marking, duplicate-entry prevention, attendance retrieval, and percentage calculation.
 
-It allows:
-* Managing subjects
-* Marking daily attendance for students
-* Preventing duplicate attendance for the same student, subject, and date
-* Fetching attendance records
-* Calculating attendance percentage (overall & subject-wise)
+The project demonstrates REST API design, database connectivity, validation, modular programming, and SQL-based data handling.
 
-This project focuses on backend fundamentals, clean API design, validation, and SQL-based data handling.
+## Objectives
+- Digitize student attendance recording.
+- Reduce duplicate and incorrect attendance entries.
+- Store attendance records in a structured MySQL database.
+- Retrieve attendance by student and date.
+- Calculate overall and subject-wise attendance percentage.
+- Apply modular Flask development and REST principles.
 
-## Tech Stack
-* Python
-* Flask
-* MySQL
-* Postman (API testing)
+## Major Functional Modules
+### 1. Subject Management
+Creates and retrieves academic subjects using subject name and subject code.
 
-## Project Structure
+### 2. Attendance Management
+Marks a student as present or absent for a selected subject and date while preventing duplicate attendance.
+
+### 3. Attendance Reporting and Percentage
+Retrieves attendance history and calculates overall or subject-wise attendance percentage.
+
+## Features
+- Create subjects
+- View subjects
+- Mark student attendance
+- Prevent duplicate attendance for the same student, subject, and date
+- View attendance by student
+- View attendance by date
+- Calculate overall attendance percentage
+- Calculate subject-wise attendance percentage
+- Validate request data
+- Return meaningful HTTP status codes
+
+## Input and Output Structure
+The API accepts JSON input through HTTP requests and returns JSON output.
+
+Example attendance input:
+```json
+{
+  "student_id": 1,
+  "subject_id": 1,
+  "attendance_date": "2026-09-13",
+  "status": "present"
+}
 ```
+
+Example percentage output:
+```json
+{
+  "student_id": 1,
+  "attendance_percentage": "75.00"
+}
+```
+
+## Non-Functional Requirements
+1. **Performance:** Common API operations should respond quickly for normal classroom-sized datasets.
+2. **Security:** Database credentials should not be exposed publicly and should be moved to environment variables for deployment.
+3. **Usability:** API endpoints and JSON formats are kept simple and consistent.
+4. **Reliability:** Database constraints and validation reduce invalid or duplicate records.
+5. **Maintainability:** Routes, models, and database code are separated into modules.
+6. **Error Handling:** Invalid input and duplicate attendance produce appropriate error responses.
+
+## Technology Stack
+- Python
+- Flask
+- MySQL
+- MySQL Connector for Python
+- Postman for API testing
+- Git and GitHub for version control
+
+## Recommended Project Structure
+```text
 Attendance-Management-System-API/
-│
-├── app.py                    # Application entry point
-├── db.py                     # MySQL database connection
-├── models/
-│   ├── __init__.py
-│   ├── subject.py            # Subject database operations
-│   └── attendance.py         # Attendance database operations
-├── routes/
-│   ├── __init__.py
-│   ├── subject_routes.py     # Subject-related routes
-│   └── attendance_routes.py  # Attendance-related routes
+├── app.py
+├── db.py
 ├── requirements.txt
 ├── README.md
-└── screenshots/              # Postman API testing screenshots
- ```
+├── statement.md
+├── models/
+│   ├── __init__.py
+│   ├── subject.py
+│   └── attendance.py
+├── routes/
+│   ├── __init__.py
+│   ├── subject_routes.py
+│   └── attendance_routes.py
+├── tests/
+│   └── test_api.py
+├── docs/
+│   ├── architecture.md
+│   ├── workflow.md
+│   ├── use_case.md
+│   ├── sequence_diagram.md
+│   ├── component_diagram.md
+│   ├── er_diagram.md
+│   └── design_decisions.md
+└── screenshots/
+```
 
-## Setup Instructions
-### 1️ Clone the repository
-```
-git clone https://github.com/iamajaykr06/Attendance-Management-System-API.git
-cd Attendance-Management-System-API
-```
-
-### 2️ Create virtual environment (recommended)
-```
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
-```
-
-### 3 Install dependencies
-```
-pip install -r requirements.txt
-```
-
-## ️Database Setup
-### Create Database
-```
+## Database Setup
+Create the database:
+```sql
 CREATE DATABASE attendance_db;
+USE attendance_db;
 ```
 
-### Create Subjects Table
-```
+Create the subjects table:
+```sql
 CREATE TABLE subjects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -70,8 +117,8 @@ CREATE TABLE subjects (
 );
 ```
 
-### Create Attendance Table
-```
+Create the attendance table:
+```sql
 CREATE TABLE attendance (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -82,120 +129,110 @@ CREATE TABLE attendance (
     UNIQUE(student_id, subject_id, attendance_date)
 );
 ```
-Note: Student records are assumed to exist and are referenced using `student_id`.
 
-The UNIQUE constraint ensures attendance cannot be marked twice for the same student, subject, and date.
-
-## Update Database Credentials
-Edit `db.py` and update:
-* MySQL username
-* Password
-* Database name
-
-## Run the Application
+## Installation and Running
+1. Clone your repository.
+```bash
+git clone https://github.com/sameer25bai10985-alt/Library-management-system-project.git
+cd Library-management-system-project
 ```
+
+2. Create and activate a virtual environment.
+```bash
+python -m venv venv
+```
+Windows:
+```bash
+venv\Scripts\activate
+```
+Linux/macOS:
+```bash
+source venv/bin/activate
+```
+
+3. Install dependencies.
+```bash
+pip install -r requirements.txt
+```
+
+4. Configure MySQL credentials in `db.py`.
+
+5. Run the Flask application.
+```bash
 python app.py
 ```
 
-Server runs at:
-```http://127.0.0.1:5000```
-
-## API Endpoints
-### Create Subject
-
-**POST** `/subjects`
-```
-{
-  "name": "Software Engineering",
-  "code": "CS101"
-}
+Default development URL:
+```text
+http://127.0.0.1:5000
 ```
 
-Responses
-- `201 Created`
-- `400 Bad Request`
+## Main API Endpoints
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/subjects` | Create a subject |
+| GET | `/subjects` | Get all subjects |
+| POST | `/attendance` | Mark attendance |
+| GET | `/attendance/student/{student_id}` | Get attendance of a student |
+| GET | `/attendance/date/{date}` | Get attendance for a date |
+| GET | `/attendance/percentage/student/{student_id}` | Overall percentage |
+| GET | `/attendance/percentage/student/{student_id}/subject/{subject_id}` | Subject-wise percentage |
 
-Example error response:
+## Testing Instructions
+1. Start MySQL and create the required database/tables.
+2. Run the Flask server using `python app.py`.
+3. Run:
+```bash
+python tests/test_api.py
 ```
-{
-  "message": "Attendance already marked or invalid data"
-}
-```
-## Get All Subjects
-**GET** `/subjects`
+4. APIs can also be tested manually in Postman.
+5. Capture screenshots for successful subject creation, attendance marking, duplicate validation, retrieval, and percentage calculation.
 
-## Mark Attendance
-**POST** `/attendance`
-```
-{
-  "student_id": 1,
-  "subject_id": 1,
-  "attendance_date": "2026-01-12",
-  "status": "present"
-}
-```
+## Expected Validation Tests
+- Missing required JSON fields should be rejected.
+- Duplicate attendance for the same student, subject, and date should be rejected.
+- Invalid attendance status should be rejected.
+- Valid attendance should be stored successfully.
+- Attendance percentage should be calculated from stored records.
 
-### Responses
-- `201 Created`
-- `400 Bad Request` (duplicate or invalid data)
-
-## Get Attendance by Student
-**GET** `/attendance/student/{student_id}`
-
-## Get Attendance by Date
-**GET** `/attendance/date/{date}`
-
-## Attendance Percentage (Overall)
-**GET** `/attendance/percentage/student/{student_id}`
-### Response
-```
-{
-  "student_id": 1,
-  "attendance_percentage": "100.00"
-}
-```
-
-## Attendance Percentage (Subject-wise)
-**GET** `/attendance/percentage/student/{student_id}/subject/{subject_id}`
-### Response
-```
-{
-  "student_id": 1,
-  "subject_id": 1,
-  "attendance_percentage": "100.00"
-}
-```
+## Design Documentation
+The `docs/` folder contains architecture, workflow, use-case, sequence, component, ER, and design-decision documentation.
 
 ## Screenshots
-All API request & response screenshots (tested using Postman) are available in the screenshots/ directory, including:
-- Subject creation
-- Attendance marking
-- Duplicate attendance validation
-- Attendance retrieval
-- Attendance percentage calculation
+Store Postman screenshots in the `screenshots/` folder. Recommended screenshots:
+- Create subject
+- Get subjects
+- Mark attendance
+- Duplicate attendance error
+- Student attendance history
+- Date-wise attendance
+- Overall percentage
+- Subject-wise percentage
 
-## Features Implemented
-- Subject management
-- Attendance marking with duplicate prevention
-- Date-wise and student-wise attendance retrieval
-- Attendance percentage calculation
-- Input validation
-- Proper HTTP status codes
-- Clean project structure
+## Limitations
+- Student details are currently represented by `student_id` rather than a complete student-management module.
+- No login or role-based authentication is included.
+- No graphical frontend is included.
+- Database credentials may require manual configuration.
+
+## Future Enhancements
+- Student management module
+- Teacher/admin login and authentication
+- Web dashboard
+- Low-attendance alerts
+- Monthly attendance reports
+- CSV/PDF export
+- QR-code or biometric attendance integration
+- Cloud deployment
 
 ## Learning Outcomes
-- REST API design using Flask
-- SQL constraints for data integrity
-- Backend validation strategies
-- Attendance calculation logic
-- Clean separation of routes and models
-
-- ## Non-Functional Requirements
-
-1. Usability – The system should be simple and easy to use.
-2. Performance – Pages and database operations should respond quickly.
-3. Reliability – Library data should be stored and retrieved correctly.
-4. Security – Only authorized users should be allowed to modify data.
+- REST API development using Flask
+- MySQL database connectivity
+- CRUD/data operations
+- Validation and SQL constraints
+- Modular backend design
+- API testing with Postman
+- Git/GitHub version control
 
 ## Author
-Ajay Kumar
+Sameer Yadav
