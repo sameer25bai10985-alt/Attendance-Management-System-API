@@ -77,7 +77,7 @@ Example percentage output:
 
 ## Project Structure
 ```text
-Library-management-system-project/
+Attendance-Management-System-API/
 ├── app.py
 ├── db.py
 ├── requirements.txt
@@ -154,8 +154,8 @@ CREATE TABLE students (
 ## Installation and Running
 1. Clone your repository.
 ```bash
-git clone https://github.com/sameer25bai10985-alt/Library-management-system-project.git
-cd Library-management-system-project
+git clone https://github.com/sameer25bai10985-alt/Attendance-Management-System-API.git
+cd Attendance-Management-System-API
 ```
 
 2. Create and activate a virtual environment.
