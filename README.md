@@ -190,5 +190,12 @@ All API request & response screenshots (tested using Postman) are available in t
 - Attendance calculation logic
 - Clean separation of routes and models
 
+- ## Non-Functional Requirements
+
+1. Usability – The system should be simple and easy to use.
+2. Performance – Pages and database operations should respond quickly.
+3. Reliability – Library data should be stored and retrieved correctly.
+4. Security – Only authorized users should be allowed to modify data.
+
 ## Author
 Ajay Kumar
