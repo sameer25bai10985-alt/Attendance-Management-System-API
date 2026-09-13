@@ -1,205 +1,96 @@
-# Attendance Management System API
+Attendance Management System API
 
-## 1. Project Overview
+About Project
 
-The **Attendance Management System API** is a Flask-based REST API used to manage students, subjects, and attendance records.
+Attendance Management System API is a Flask REST API for managing students, subjects, and attendance records.
 
-It uses **Python, Flask, and MySQL** to store and manage attendance data.
+Features
 
-## 2. Objectives
+Student Management
+Subject Management
+Mark Attendance
+Prevent Duplicate Attendance
+View Attendance
+Student-wise Attendance
+Date-wise Attendance
+Overall Attendance Percentage
+Subject-wise Attendance Percentage
+Input Validation and Error Handling
 
-* Manage student records
-* Manage subject records
-* Mark student attendance
-* Prevent duplicate attendance
-* View attendance by student and date
-* Calculate overall attendance percentage
-* Calculate subject-wise attendance percentage
+Technologies Used
 
-## 3. Main Features
+Python
+Flask
+MySQL
+REST API
+Postman
+GitHub
 
-* Student Management
-* Subject Management
-* Attendance Management
-* Duplicate Attendance Validation
-* Student-wise Attendance
-* Date-wise Attendance
-* Overall Attendance Percentage
-* Subject-wise Attendance Percentage
-* Input Validation and Error Handling
+Project Modules
 
-## 4. Technologies Used
+1. Student Module
+2. Subject Module
+3. Attendance Module
+4. Percentage Module
 
-* **Python**
-* **Flask**
-* **MySQL**
-* **REST API**
-* **Postman**
-* **Git & GitHub**
+Architecture
 
-## 5. Project Structure
+Postman → Flask API → Routes → Database → MySQL
 
-```text
-Attendance-Management-System-API/
-│
-├── app.py
-├── db.py
-├── student.py
-├── student_routes.py
-├── subject.py
-├── subject_routes.py
-├── attendance.py
-├── attendance_routes.py
-├── test_api.py
-├── requirements.txt
-├── .env.example
-├── .gitignore
-│
-├── README.md
-├── statement.md
-├── PROJECT_REPORT.md
-├── architecture.md
-├── workflow.md
-├── use_case.md
-├── component_diagram.md
-├── sequence_diagram.md
-├── er_diagram.md
-├── design_decisions.md
-│
-├── 01-create-subject.png
-├── 02-get-subjects.png
-├── 03-mark-attendance.png
-├── 04-duplicate-attendance.png
-├── 05-attendance-by-student.png
-├── 06-attendance-by-date.png
-├── 07-overall-percentage.png
-└── 08-subject-percentage.png
-```
-
-## 6. System Architecture
-
-```text
-Client / Postman
-       ↓
-Flask REST API
-       ↓
-Routes + Models
-       ↓
-Database Layer
-       ↓
-MySQL Database
-```
-
-## 7. Main Modules
-
-### Student Module
-
-Creates, retrieves, updates, and deletes student information.
-
-### Subject Module
-
-Creates, retrieves, updates, and deletes subject information.
-
-### Attendance Module
-
-Marks attendance, prevents duplicate entries, and retrieves attendance records.
-
-### Percentage Module
-
-Calculates overall and subject-wise attendance percentages.
-
-## 8. Setup and Run
+Setup
 
 Install the required packages:
 
-```bash
 pip install -r requirements.txt
-```
 
-Configure the MySQL database using the `.env` file. Use `.env.example` as a reference.
+Configure the MySQL database using the .env file.
 
 Run the application:
 
-```bash
 python app.py
-```
 
-## 9. API Testing
+API Testing
 
-The API can be tested using **Postman**.
+The API is tested using Postman.
 
-Main operations:
+Main tests:
 
 1. Create Subject
 2. Get Subjects
 3. Mark Attendance
-4. Check Duplicate Attendance
-5. Get Attendance by Student
-6. Get Attendance by Date
-7. Get Overall Attendance Percentage
-8. Get Subject-wise Attendance Percentage
+4. Duplicate Attendance
+5. Attendance by Student
+6. Attendance by Date
+7. Overall Percentage
+8. Subject Percentage
 
-## 10. Testing
+Testing
 
-The project includes `test_api.py`.
+test_api.py contains API tests for validation, student creation, attendance creation, duplicate attendance, and percentage calculation.
 
-Testing covers:
+Documentation
 
-* Valid requests
-* Missing input fields
-* Empty input
-* Invalid content type
-* Attendance creation
-* Duplicate attendance
-* Student creation
-* Attendance percentage calculation
+statement.md - Problem Statement
+architecture.md - System Architecture
+workflow.md - Project Workflow
+use_case.md - Use Case
+component_diagram.md - Component Diagram
+sequence_diagram.md - Sequence Diagram
+er_diagram.md - ER Diagram
+design_decisions.md - Design Decisions
+PROJECT_REPORT.md - Project Report
 
-## 11. Documentation
+Screenshots
 
-The repository contains:
+Screenshots of the API operations and results are included in the repository.
 
-* Problem Statement
-* Project Workflow
-* System Architecture
-* Use Case Diagram
-* Component Diagram
-* Sequence Diagram
-* ER Diagram
-* Design Decisions
-* Detailed Project Report
+Future Enhancements
 
-## 12. Screenshots
+Low Attendance Alert
+Student Login
+Admin Dashboard
+Attendance Reports
 
-Screenshots are included for the main API operations and results.
+Conclusion
 
-For final submission, real **Postman screenshots** should be used for API testing evidence.
-
-## 13. Future Enhancements
-
-* Low Attendance Alert
-* Student Login
-* Admin Dashboard
-* Email/SMS Notifications
-* Attendance Reports
-* Cloud Database Deployment
-
-## 14. Project Report
-
-`PROJECT_REPORT.md` contains:
-
-* Introduction
-* Problem Statement
-* Functional Requirements
-* Non-functional Requirements
-* Architecture
-* Design Diagrams
-* Implementation
-* Testing
-* Challenges
-* Learnings
-* Future Enhancements
-* References
-
-## 15. Conclusion
-
-The **Attendance Management System API** provides a simple way to manage students, subjects, and attendance using **Flask REST APIs and MySQL**. It demonstrates modular programming, database connectivity, validation, testing, and GitHub-based project development.
+This project provides a simple way to manage student attendance using Flask, REST API, and MySQL.
