@@ -56,7 +56,7 @@ Add Postman screenshots showing:
 8. Subject-wise percentage
 
 ## 11. Testing Approach
-Testing includes valid API requests, missing-field validation, duplicate attendance validation, retrieval operations, and attendance percentage verification. The included `tests/test_api.py` provides basic integration tests for a running local server.
+Testing includes valid API requests, missing-field validation, duplicate attendance validation, retrieval operations, and attendance percentage verification. `tests/test_api.py` provides an automated suite (Flask test client + mocked DB layer, run via `python -m pytest tests/test_api.py -v`) that runs without a live MySQL server, plus manual Postman testing against a real database (see `screenshots/`).
 
 ## 12. Challenges Faced
 - Designing database tables for attendance data.
@@ -74,7 +74,7 @@ Testing includes valid API requests, missing-field validation, duplicate attenda
 - Git and GitHub version control.
 
 ## 14. Future Enhancements
-- Student profile management.
+- Foreign-key constraints between attendance and students/subjects
 - Teacher/admin authentication.
 - Web dashboard.
 - Low-attendance alerts.

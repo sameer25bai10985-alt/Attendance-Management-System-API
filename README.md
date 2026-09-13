@@ -17,10 +17,13 @@ The project demonstrates REST API design, database connectivity, validation, mod
 ### 1. Subject Management
 Creates and retrieves academic subjects using subject name and subject code.
 
-### 2. Attendance Management
+### 2. Student Management
+Creates, retrieves, updates, deletes, and searches student records (name, roll number, email, branch).
+
+### 3. Attendance Management
 Marks a student as present or absent for a selected subject and date while preventing duplicate attendance.
 
-### 3. Attendance Reporting and Percentage
+### 4. Attendance Reporting and Percentage
 Retrieves attendance history and calculates overall or subject-wise attendance percentage.
 
 ## Features
@@ -72,21 +75,26 @@ Example percentage output:
 - Postman for API testing
 - Git and GitHub for version control
 
-## Recommended Project Structure
+## Project Structure
 ```text
-Attendance-Management-System-API/
+Library-management-system-project/
 ├── app.py
 ├── db.py
 ├── requirements.txt
 ├── README.md
 ├── statement.md
+├── PROJECT_REPORT.md
+├── .env.example
+├── .gitignore
 ├── models/
 │   ├── __init__.py
 │   ├── subject.py
+│   ├── student.py
 │   └── attendance.py
 ├── routes/
 │   ├── __init__.py
 │   ├── subject_routes.py
+│   ├── student_routes.py
 │   └── attendance_routes.py
 ├── tests/
 │   └── test_api.py
@@ -99,6 +107,8 @@ Attendance-Management-System-API/
 │   ├── er_diagram.md
 │   └── design_decisions.md
 └── screenshots/
+    ├── README.md
+    └── 01-create-subject.png ... 08-subject-percentage.png
 ```
 
 ## Database Setup
@@ -130,6 +140,17 @@ CREATE TABLE attendance (
 );
 ```
 
+Create the students table:
+```sql
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    roll_no VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    branch VARCHAR(100) NOT NULL
+);
+```
+
 ## Installation and Running
 1. Clone your repository.
 ```bash
@@ -155,7 +176,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Configure MySQL credentials in `db.py`.
+4. Configure MySQL credentials as environment variables (copy `.env.example` to `.env` and fill in your values, or export them directly):
+```bash
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_mysql_password_here
+DB_NAME=attendance_db
+```
 
 5. Run the Flask application.
 ```bash
@@ -172,21 +199,37 @@ http://127.0.0.1:5000
 |---|---|---|
 | POST | `/subjects` | Create a subject |
 | GET | `/subjects` | Get all subjects |
+| GET | `/subjects/{subject_id}` | Get a subject by ID |
+| PUT | `/subjects/{subject_id}` | Update a subject |
+| DELETE | `/subjects/{subject_id}` | Delete a subject |
 | POST | `/attendance` | Mark attendance |
 | GET | `/attendance/student/{student_id}` | Get attendance of a student |
 | GET | `/attendance/date/{date}` | Get attendance for a date |
 | GET | `/attendance/percentage/student/{student_id}` | Overall percentage |
 | GET | `/attendance/percentage/student/{student_id}/subject/{subject_id}` | Subject-wise percentage |
+| POST | `/students` | Create a student |
+| GET | `/students` | Get all students |
+| GET | `/students/{student_id}` | Get a student by ID |
+| PUT | `/students/{student_id}` | Update a student |
+| DELETE | `/students/{student_id}` | Delete a student |
+| GET | `/students/search` | Search students |
 
 ## Testing Instructions
-1. Start MySQL and create the required database/tables.
-2. Run the Flask server using `python app.py`.
-3. Run:
+
+### Automated tests (no live database needed)
+The test suite mocks the database layer, so it can run without MySQL being set up:
 ```bash
-python tests/test_api.py
+python -m pytest tests/test_api.py -v
 ```
-4. APIs can also be tested manually in Postman.
-5. Capture screenshots for successful subject creation, attendance marking, duplicate validation, retrieval, and percentage calculation.
+This covers validation (missing/empty fields), successful create/mark flows, duplicate-attendance
+rejection, and not-found/no-records responses.
+
+### Manual / live testing (with a real MySQL database)
+1. Start MySQL and create the required database/tables (see **Database Setup** above).
+2. Set the `DB_*` environment variables (see **Installation and Running**).
+3. Run the Flask server using `python app.py`.
+4. Exercise the endpoints in Postman.
+5. Capture screenshots for successful subject creation, attendance marking, duplicate validation, retrieval, and percentage calculation, and save them in `screenshots/` (see `screenshots/README.md`).
 
 ## Expected Validation Tests
 - Missing required JSON fields should be rejected.
@@ -199,24 +242,22 @@ python tests/test_api.py
 The `docs/` folder contains architecture, workflow, use-case, sequence, component, ER, and design-decision documentation.
 
 ## Screenshots
-Store Postman screenshots in the `screenshots/` folder. Recommended screenshots:
-- Create subject
-- Get subjects
-- Mark attendance
-- Duplicate attendance error
-- Student attendance history
-- Date-wise attendance
-- Overall percentage
-- Subject-wise percentage
+Mockup images showing the expected request/response for each key endpoint are stored in
+`screenshots/` (see `screenshots/README.md` for the full list and an explanation — these are
+illustrations of the documented API contract, not live captures against a running server):
+
+![Create subject](screenshots/01-create-subject.png)
+![Mark attendance duplicate rejected](screenshots/04-duplicate-attendance.png)
+![Overall attendance percentage](screenshots/07-overall-percentage.png)
 
 ## Limitations
-- Student details are currently represented by `student_id` rather than a complete student-management module.
 - No login or role-based authentication is included.
 - No graphical frontend is included.
-- Database credentials may require manual configuration.
+- `student_id`/`subject_id` in the `attendance` table are not enforced with database-level foreign-key constraints yet.
+- Database credentials must be configured via environment variables before running.
 
 ## Future Enhancements
-- Student management module
+- Foreign-key constraints between attendance and students/subjects
 - Teacher/admin login and authentication
 - Web dashboard
 - Low-attendance alerts

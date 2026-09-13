@@ -7,7 +7,7 @@ Attendance Management System API
 Manual attendance recording in colleges and classrooms is time-consuming and can lead to duplicate entries, calculation mistakes, and difficulty in checking a student's attendance history. A simple backend system is needed to store attendance in a structured database and provide reliable APIs for recording, retrieving, and calculating attendance.
 
 ## Scope of the Project
-The project provides a backend REST API for managing subjects and student attendance. It allows users to create subjects, mark daily attendance, retrieve attendance records, and calculate overall or subject-wise attendance percentage. The present scope focuses on backend functionality using Flask and MySQL. A graphical frontend, authentication, notifications, and biometric attendance are outside the current scope and can be added later.
+The project provides a backend REST API for managing subjects, students, and attendance. It allows users to create subjects, manage student records (create/update/delete/search), mark daily attendance, retrieve attendance records, and calculate overall or subject-wise attendance percentage. The present scope focuses on backend functionality using Flask and MySQL. A graphical frontend, authentication, notifications, and biometric attendance are outside the current scope and can be added later.
 
 ## Target Users
 - College teachers and faculty members
@@ -17,10 +17,11 @@ The project provides a backend REST API for managing subjects and student attend
 
 ## High-Level Features
 1. Subject management
-2. Student attendance marking
-3. Duplicate-attendance prevention
-4. Student-wise attendance retrieval
-5. Date-wise attendance retrieval
-6. Overall attendance percentage calculation
-7. Subject-wise attendance percentage calculation
-8. Input validation and appropriate HTTP responses
+2. Student management (create, update, delete, search)
+3. Student attendance marking
+4. Duplicate-attendance prevention
+5. Student-wise attendance retrieval
+6. Date-wise attendance retrieval
+7. Overall attendance percentage calculation
+8. Subject-wise attendance percentage calculation
+9. Input validation and appropriate HTTP responses
