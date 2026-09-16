@@ -1,23 +1,24 @@
-Attendance Management System API
+ATTENDANCE MANAGEMENT SYSTEM API
 
-About Project
+PROJECT OVERVIEW
 
-Attendance Management System API is a Flask REST API for managing students, subjects, and attendance records.
+Attendance Management System API is a Flask-based REST API for managing students, subjects, and attendance records.
 
-Features
+The project uses Python, Flask and MySQL.
 
-Student Management
-Subject Management
-Mark Attendance
-Prevent Duplicate Attendance
-View Attendance
-Student-wise Attendance
-Date-wise Attendance
-Overall Attendance Percentage
-Subject-wise Attendance Percentage
-Input Validation and Error Handling
+FEATURES
 
-Technologies Used
+1. Student Management
+2. Subject Management
+3. Mark Attendance
+4. Prevent Duplicate Attendance
+5. View Attendance by Student
+6. View Attendance by Date
+7. Calculate Overall Attendance Percentage
+8. Calculate Subject-wise Attendance Percentage
+9. Input Validation and Error Handling
+
+TECHNOLOGIES USED
 
 Python
 Flask
@@ -26,68 +27,95 @@ REST API
 Postman
 GitHub
 
-Project Modules
+PROJECT MODULES
 
 1. Student Module
 2. Subject Module
 3. Attendance Module
 4. Percentage Module
 
-Architecture
+ENVIRONMENT SETUP
 
-Postman → Flask API → Routes → Database → MySQL
+Install the following:
 
-Setup
+1. Python 3
+2. MySQL
+3. Postman
 
-Install the required packages:
+STEP 1: INSTALL DEPENDENCIES
+
+Open the project folder in the terminal and run:
 
 pip install -r requirements.txt
 
-Configure the MySQL database using the .env file.
+STEP 2: CONFIGURE DATABASE
 
-Run the application:
+1. Install and start MySQL.
+2. Create the required project database.
+3. Create a .env file in the project folder.
+4. Add the required database configuration.
+5. Use .env.example as a reference.
+
+STEP 3: RUN THE PROJECT
+
+Run the following command:
 
 python app.py
 
-API Testing
+The Flask API will start on the local server.
 
-The API is tested using Postman.
+STEP 4: TEST THE API
 
-Main tests:
+Open Postman and test the API endpoints.
+
+Main operations:
 
 1. Create Subject
 2. Get Subjects
 3. Mark Attendance
-4. Duplicate Attendance
-5. Attendance by Student
-6. Attendance by Date
-7. Overall Percentage
-8. Subject Percentage
+4. Check Duplicate Attendance
+5. Get Attendance by Student
+6. Get Attendance by Date
+7. Get Overall Attendance Percentage
+8. Get Subject-wise Attendance Percentage
 
-Testing
+TESTING
 
-test_api.py contains API tests for validation, student creation, attendance creation, duplicate attendance, and percentage calculation.
+API tests are available in test_api.py.
 
-Documentation
+The tests cover input validation, student creation, attendance creation, duplicate attendance and attendance percentage calculations.
+
+PROJECT DOCUMENTATION
 
 statement.md - Problem Statement
+
 architecture.md - System Architecture
+
 workflow.md - Project Workflow
-use_case.md - Use Case
+
+use_case.md - Use Case Diagram
+
 component_diagram.md - Component Diagram
+
 sequence_diagram.md - Sequence Diagram
+
 er_diagram.md - ER Diagram
+
 design_decisions.md - Design Decisions
-PROJECT_REPORT.md - Project Report
 
+PROJECT_REPORT.md - Detailed Project Report
 
-Future Enhancements
+SCREENSHOTS
 
-Low Attendance Alert
-Student Login
-Admin Dashboard
-Attendance Reports
+Screenshots of the API operations and results are included in the repository.
 
-Conclusion
+FUTURE ENHANCEMENTS
 
-This project provides a simple way to manage student attendance using Flask, REST API, and MySQL.
+1. Low Attendance Alert
+2. Student Login
+3. Admin Dashboard
+4. Attendance Reports
+
+CONCLUSION
+
+The Attendance Management System API provides a simple way to manage student attendance using Flask REST API and MySQL.
