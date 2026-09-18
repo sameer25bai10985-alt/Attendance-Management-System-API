@@ -1,8 +1,7 @@
 # Attendance Management System API — Project Report
 
-## 1. Cover Page
-Project Title:Attendance Management System API  
- Student:Sameer Yadav  
+ 1. Cover Page
+Project Title:Attendance Management System API    
 
  2. Introduction
 Attendance is an important academic record in educational institutions. Manual attendance systems require repeated record keeping and make it difficult to retrieve data or calculate attendance percentage quickly. This project implements a backend REST API that stores attendance information in MySQL and exposes operations through Flask endpoint.
@@ -80,7 +79,7 @@ Testing includes valid API requests, missing-field validation, duplicate attenda
 - QR-code or biometric attendance.
 - Cloud deployment.
 
-## 15. References
+15. References
 - Flask Documentation
 - MySQL Documentation
 - Python Documentation
