@@ -66,21 +66,4 @@ The calculation can be performed for a student's overall attendance or for the p
 8. Response is sent back
    After the database operation is completed, the result is returned to the Flask route. The route sends the final response in JSON format to the client.
 
-MAIN FLOW
-
-Client / Postman
-↓
-Flask API Route
-↓
-Input Validation
-↓
-Model Function
-↓
-MySQL Database
-↓
-Result
-↓
-JSON Response to Client
-
-The same basic flow is used for student subject, and attendance operations. The difference is in the route and model function used for the each type of request.
 
