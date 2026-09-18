@@ -52,9 +52,9 @@ flowchart TB
 
 ## Why this structure
 
-- **Blueprints per resource** (`subject_routes`, `attendance_routes`, `student_routes`) keep each
+  Blueprints per resource** (`subject_routes`, `attendance_routes`, `student_routes`) keep each
   resource's endpoints isolated and independently testable.
-- **Models own all SQL**, so routes never talk to the database directly — this keeps validation
+  Models own all SQL**, so that routes never talk to the database directly — this keeps validation
   (in routes) separate from persistence (in models).
-- **`db.py` is the single connection point**, so credentials and connection logic live in exactly
-  one place and are read from environment variables rather than hardcoded.
+ `db.py` is the single connection point**, so credentials and connection logic live in exactly
+  one place and are read from  the environment variables rather than hardcoded.
