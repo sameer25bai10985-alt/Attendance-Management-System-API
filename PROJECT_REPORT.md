@@ -1,17 +1,16 @@
 # Attendance Management System API — Project Report
 
 ## 1. Cover Page
-**Project Title:** Attendance Management System API  
-**Student:** Sameer Yadav  
-**Course:** Build Your Own Project / VITyarthi  
+Project Title:Attendance Management System API  
+ Student:Sameer Yadav  
 
-## 2. Introduction
-Attendance is an important academic record in educational institutions. Manual attendance systems require repeated record keeping and make it difficult to retrieve data or calculate attendance percentage quickly. This project implements a backend REST API that stores attendance information in MySQL and exposes operations through Flask endpoints.
+ 2. Introduction
+Attendance is an important academic record in educational institutions. Manual attendance systems require repeated record keeping and make it difficult to retrieve data or calculate attendance percentage quickly. This project implements a backend REST API that stores attendance information in MySQL and exposes operations through Flask endpoint.
 
-## 3. Problem Statement
+ 3. Problem Statement
 Manual attendance recording can be slow, repetitive, and prone to duplicate entries and calculation mistakes. The project provides a structured API-based solution for creating subjects, recording attendance, retrieving records, and calculating attendance percentages.
 
-## 4. Functional Requirements
+ 4. Functional Requirements
 - Create and retrieve subjects.
 - Mark student attendance as present or absent.
 - Prevent duplicate attendance for the same student, subject, and date.
@@ -19,8 +18,7 @@ Manual attendance recording can be slow, repetitive, and prone to duplicate entr
 - Retrieve attendance by date.
 - Calculate overall attendance percentage.
 - Calculate subject-wise attendance percentage.
-
-## 5. Non-Functional Requirements
+ 5. Non-Functional Requirements
 - Performance: fast response for normal classroom data.
 - Security: protect database credentials.
 - Usability: simple REST endpoints and JSON.
@@ -28,21 +26,21 @@ Manual attendance recording can be slow, repetitive, and prone to duplicate entr
 - Maintainability: modular routes/models/database structure.
 - Error handling: invalid or duplicate requests return meaningful errors.
 
-## 6. System Architecture
+ 6. System Architecture
 See `docs/architecture.md`.
 
-## 7. Design Diagrams
+ 7. Design Diagrams
 - Use Case: `docs/use_case.md`
 - Workflow: `docs/workflow.md`
 - Sequence: `docs/sequence_diagram.md`
 - Component: `docs/component_diagram.md`
 - ER Diagram: `docs/er_diagram.md`
 
-## 8. Design Decisions & Rationale
+ 8. Design Decisions & Rationale
 See `docs/design_decisions.md`.
 
-## 9. Implementation Details
-The backend is implemented in Python using Flask. HTTP routes accept JSON requests and call model/database functions. MySQL stores subjects and attendance records. A unique database constraint prevents duplicate student-subject-date attendance entries.
+9. Implementation Details
+The backend is implemented in Python using Flask. HTTP routes accept JSON requests and call model functions. MySQL stores subjects and attendance records. A unique database constraint prevents duplicate student-subject-date attendance entries.
 
 ## 10. Screenshots / Results
 Add Postman screenshots showing:
@@ -55,17 +53,17 @@ Add Postman screenshots showing:
 7. Overall percentage
 8. Subject-wise percentage
 
-## 11. Testing Approach
+ 11. Testing Approach
 Testing includes valid API requests, missing-field validation, duplicate attendance validation, retrieval operations, and attendance percentage verification. `tests/test_api.py` provides an automated suite (Flask test client + mocked DB layer, run via `python -m pytest tests/test_api.py -v`) that runs without a live MySQL server, plus manual Postman testing against a real database (see `screenshots/`).
 
-## 12. Challenges Faced
+ 12. Challenges Faced
 - Designing database tables for attendance data.
 - Preventing duplicate attendance records.
 - Connecting Flask with MySQL.
 - Returning correct HTTP responses for invalid data.
 - Calculating attendance percentage from database records.
 
-## 13. Learnings & Key Takeaways
+ 13. Learnings & Key Takeaways
 - REST API design using Flask.
 - MySQL database connectivity and constraints.
 - Modular backend programming.
@@ -73,7 +71,7 @@ Testing includes valid API requests, missing-field validation, duplicate attenda
 - API testing using Postman.
 - Git and GitHub version control.
 
-## 14. Future Enhancements
+ 14. Future Enhancements
 - Foreign-key constraints between attendance and students/subjects
 - Teacher/admin authentication.
 - Web dashboard.
