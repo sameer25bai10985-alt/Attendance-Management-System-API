@@ -53,15 +53,14 @@ sequenceDiagram
         Route-->>Client: 200 {student_id, attendance_percentage}
     end
 ```
-
 SEQUENCE DIAGRAM
 
 The sequence diagram shows how a request moves through the Attendance Management System API.
 
-For example when the attendance is marked the flow is:
+For example when a attendance is marked the flow is:
 
 1. The client sends a POST request to the attendance endpoint.
-2. The Flask route receives the request and reads the JSON data.
+2. The Flask route receive the request and reads the JSON data.
 3. The route checks the required fields and verifies that the values are not empty.
 4. The request is passed to the attendance model function.
 5. The model checks the database for an existing attendance record.
@@ -70,11 +69,15 @@ For example when the attendance is marked the flow is:
 8. The database returns the result of the operation.
 9. Flask sends the final response back to the client.
 
-Attendance percentage follows a slightly different flow. The client requests the attendance percentage, the route sends the required student or subject information to the model, and the model reads the attendance records from MySQL. The number of present records and total records are used to calculate the percentage which is then returned in the API response.
+Attendance percentage follows a slightly different flow. The client requests the attendance percentage the route send to the required student or subject information to the model, and the model reads the attendance records from MySQL. The number of present records and total records are used to calculate the percentage  which is then returned in the API response.
 
 The main components involved are:
 
 Client → Flask Route → Model Function → MySQL Database → Model Function → Flask Route → Client
 
 This sequence represents the actual separation used in the project between API routes, database-related functions, and the MySQL database.
+
+
+
+
 
