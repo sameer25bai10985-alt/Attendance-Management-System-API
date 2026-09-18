@@ -52,6 +52,8 @@ sequenceDiagram
         Model-->>Route: percentage
         Route-->>Client: 200 {student_id, attendance_percentage}
     end
+```
+
 SEQUENCE DIAGRAM
 
 The sequence diagram shows how a request moves through the Attendance Management System API.
