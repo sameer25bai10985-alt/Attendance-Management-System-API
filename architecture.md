@@ -1,7 +1,7 @@
 # System Architecture
 
-The system follows a simple 3-tier backend architecture: a Flask HTTP layer, a
-model/data-access layer, and a MySQL database.
+The system follows a simple 3-tier backend architecture: of a Flask HTTP layer, a
+model/data-access layer, and the MySQL database.
 
 ```mermaid
 flowchart TB
@@ -47,8 +47,8 @@ flowchart TB
 |---|---|---|
 | Presentation / API | Parses HTTP requests, validates required fields, returns JSON + status codes | `app.py`, `routes/*.py` |
 | Business / Data Access | Builds and executes SQL, applies business rules (e.g. duplicate-attendance prevention) | `models/*.py` |
-| Connection | Opens a MySQL connection using credentials from environment variables | `db.py` |
-| Storage | Persists subjects, attendance records, and students | MySQL (`attendance_db`) |
+| Connection | Opens a MySQL connection using credentials from  the environment variables | `db.py` |
+| Storage | Persists subjects the attendance records  and students | MySQL (`attendance_db`) |
 
 ## Why this structure
 
