@@ -19,12 +19,12 @@ pass an application-level "does this exist?" check before either has written its
 4. Credentials via environment variables
 `db.py` originally had a hardcoded database password. This was changed to read
 `DB_HOST` / `DB_USER` / `DB_PASSWORD` / `DB_NAME` from the environment (with `localhost`/`root`
-as safe local defaults), so real credentials never need to be committed to source control.
+as safe local defaults) so the real credentials never need to be committed to source control.
 
 5. Plain integer foreign keys instead of enforced FK constraints (for now)
 `attendance.student_id` and `attendance.subject_id` are integers that logically reference
-`students.id` and `subjects.id`, but are not yet declared with `FOREIGN KEY` constraints. This
-was a scope decision to keep the initial schema simple; adding the constraints is listed under
+`students.id` and `subjects.id` but are not yet declared with `FOREIGN KEY` constraints. This
+was a scope decision to keep the initial schema simple adding the constraints is listed under
 Future Enhancements.
 
 ## 6. REST + JSON over a templated/HTML frontend
