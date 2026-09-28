@@ -1,19 +1,10 @@
-# Python cache
-__pycache__/
-*.pyc
-
-# Virtual environment
-venv/
+target/
 .env
-
-# IDE
+*.log
 .idea/
+*.iml
 .vscode/
-
-# PyCharm
-shelf/
-httpRequests/
-
-# OS
-.DS_Store
-Thumbs.db
+.classpath
+.project
+.settings/
+HELP.md
